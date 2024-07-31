@@ -2,6 +2,7 @@ package com.example.todolist.controller;
 
 import com.example.todolist.domain.Todo;
 import com.example.todolist.service.TodoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class TodoController {
     private TodoService todoService;
 
     @PostMapping
-    public List<Todo> createTodo(@RequestBody Todo todo) {
+    public List<Todo> createTodo(@RequestBody @Valid Todo todo) {
         return todoService.createToDo(todo);
     }
 
@@ -25,7 +26,7 @@ public class TodoController {
     }
 
     @PutMapping
-    public List<Todo> updateTodo(@RequestBody Todo todo) {
+    public List<Todo> updateTodo(@RequestBody @Valid Todo todo) {
         return todoService.updateToDo(todo);
     }
 
