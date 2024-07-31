@@ -13,20 +13,18 @@ class DesafioTodolistApplicationTests {
 	private WebTestClient webTestClient;
 
 	@Test
-	void testCreateTodoSucess() {
+	void testCreateTodoSuccess() {
 		var todo = new Todo("todo 1", "desc 1", false, 1);
 		webTestClient.post()
 				.uri("/todos")
 				.bodyValue(todo)
 				.exchange()
-				.expectStatus().isOk()
+				.expectStatus().isCreated()
 				.expectBody()
-				.jsonPath("$", null).isArray()
-				.jsonPath("$.length()").isEqualTo(1)
-				.jsonPath("$[0].nome").isEqualTo(todo.getNome())
-				.jsonPath("$[0].descricao").isEqualTo(todo.getDescricao())
-				.jsonPath("$[0].realizado").isEqualTo(todo.isRealizado())
-				.jsonPath("$[0].prioridade").isEqualTo(todo.getPrioridade());
+				.jsonPath("$.nome").isEqualTo(todo.getNome())
+				.jsonPath("$.descricao").isEqualTo(todo.getDescricao())
+				.jsonPath("$.realizado").isEqualTo(todo.isRealizado())
+				.jsonPath("$.prioridade").isEqualTo(todo.getPrioridade());
 	}
 
 	@Test
